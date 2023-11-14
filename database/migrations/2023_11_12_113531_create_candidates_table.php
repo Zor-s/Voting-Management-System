@@ -12,11 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->id('candidate_id');
-            // $table->unsignedBigInteger('position_id');
+            $table->id();
             $table->foreignId('position_id')->constrained('positions')->cascadeOnDelete();
-            // $table->foreignId('candidate_party_id')->constrained('candidate_parties');
-            // $table->foreignId('department_id')->constrained('departments');
             $table->string('candidate_first_name');
             $table->timestamps();
         });

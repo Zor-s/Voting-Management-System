@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('candidate_parties', function (Blueprint $table) {
-            $table->id('candidate_party_id');
+            $table->id();
             $table->string('candidate_party_name');
             $table->timestamps();
         });
