@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('voters', function (Blueprint $table) {
             $table->id();
-            $table->integer('department_id');
+            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->string('voter_username');
             $table->string('voter_password');
             $table->string('voter_email');

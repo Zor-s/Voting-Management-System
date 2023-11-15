@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,9 +20,11 @@ class voterFactory extends Factory
      */
     public function definition(): array
     {
+        $departmentId = department::pluck('id');
+        $randomDepartmentId = $departmentId->random();
 
         return [
-            'department_id' => fake()->randomDigit(),
+            'department_id' => $randomDepartmentId,
             'voter_username' => fake()->name(),
             'voter_password' => Hash::make('password'),
             'voter_email' => fake()->unique()->safeEmail(),
