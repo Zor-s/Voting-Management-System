@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\candidate_party::factory(10)->create();
         \App\Models\department::factory(10)->create();
         \App\Models\candidate::factory(10)->create();
+        \App\Models\admin::factory(10)->create();
 
 
         // \App\Models\User::factory()->create([
