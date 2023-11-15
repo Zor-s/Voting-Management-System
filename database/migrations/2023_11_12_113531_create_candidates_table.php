@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('position_id')->constrained('positions')->cascadeOnDelete();
-            // $table->foreignId('candidate_party_id')->constrained('candidate_parties')->cascadeOnDelete();
+            $table->foreignId('candidate_party_id')->constrained('candidate_parties')->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->string('candidate_first_name');
+            $table->string('candidate_last_name');
             $table->timestamps();
         });
     }

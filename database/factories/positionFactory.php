@@ -17,7 +17,7 @@ class positionFactory extends Factory
     public function definition(): array
     {
         return [
-            'position_name'=> fake()->name(),
+            "position_name"=> $this->faker->randomElement(["position name 1","position name 2","position name 3"]),
         ];
     }
 }
