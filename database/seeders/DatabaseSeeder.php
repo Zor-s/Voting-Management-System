@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\admin::factory(10)->create();
         \App\Models\voter::factory(10)->create();
         \App\Models\election::factory(10)->create();
+        \App\Models\ballot::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

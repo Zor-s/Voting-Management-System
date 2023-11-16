@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\position as position;
-use App\Models\candidate_party as candidate_party;
-use App\Models\department as department;
+use App\Models\position;
+use App\Models\candidate_party;
+use App\Models\department;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\candidate>
  */
