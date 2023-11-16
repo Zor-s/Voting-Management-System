@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\candidate;
 use App\Models\voter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ballot>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\feedback>
  */
-class ballotFactory extends Factory
+class feedbackFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,15 +17,12 @@ class ballotFactory extends Factory
      */
     public function definition(): array
     {
-        $candidateId = candidate::pluck('id');
-        $randomCandidateId = $candidateId->random();
-        
         $voterId = voter::pluck('id');
         $randomVoterId = $voterId->random();
-        
         return [
-                'candidate_id'=> $randomCandidateId,
-                'voter_id'=> $randomVoterId,
+            'voter_id'=> $randomVoterId,
+            'feedback_rating'=> fake()->randomDigit()+1,
+            'feedback_comment'=> fake()->sentence(),
         ];
     }
 }
