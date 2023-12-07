@@ -25,13 +25,14 @@
 
 
             <div class="col my-login-form  m-2 p-4">
-                <form method="POST" action="/" class="">
+                <form id="voterForm" method="POST" action="/signup" class="">
+                    @csrf
                     <h1>Sign up</h1>
 
-                    <label for="department_name">Department:</label>
-                    <select class="form-select" id="department_name" name="department_name">
-                        <option selected>Department</option>
-                        <option value="1">One</option>
+                    <label for="department_id">Department:</label>
+                    <select class="form-select" id="department_id" name="department_id">
+                        <!-- <option selected>Department</option> -->
+                        <option value="1">1</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
@@ -52,14 +53,14 @@
                         <div class="col">
                             <div class="form-check">
                                 <p>Gender:</p>
-                                <input class="form-check-input" type="radio" name="voter_gender" id="male" />
+                                <input class="form-check-input" type="radio" name="voter_gender" id="male" value="male" />
                                 <label class="form-check-label" for="male">
                                     Male
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="voter_gender" id="female" />
+                                <input class="form-check-input" type="radio" name="voter_gender" id="female" value="female"/>
                                 <label class="form-check-label" for="female">
                                     Female
                                 </label>
@@ -67,15 +68,16 @@
                         </div>
                     </div>
 
-                    <label for="voter_password">Voter password:</label>
-                    <input type="password" id="voter_password" name="voter_password" placeholder="Enter password"
+                    <label for="voterPassword">Voter password:</label>
+                    <input type="password" id="voterPassword" name="voter_password" placeholder="Enter password"
                         class="form-control" />
 
-                    <label for="voter_repeat_password">Repeat password:</label>
-                    <input type="password" id="voter_repeat_password" name="voter_repeat_password"
+                    <label for="repeatPassword">Repeat password:</label>
+                    <input type="password" id="repeatPassword" name="voter_repeat_password"
                         placeholder="Enter password" class="form-control" />
 
-                    <button class="btn btn-outline-success">Sign up</button>
+                    <input type="submit" class="btn btn-outline-success" value="Sign up">
+
                     <a href="/">
                         <button type="button" class="btn btn-outline-primary m-1">
                             Log in
@@ -101,7 +103,21 @@
 
 
 
+    <script>
+        document.getElementById('voterForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // prevent form from submitting
 
+            var voterPassword = document.getElementById('voterPassword').value;
+            var repeatPassword = document.getElementById('repeatPassword').value;
+
+            if (voterPassword !== repeatPassword) {
+                alert('Passwords do not match. Please try again.');
+            } else {
+                // Passwords match, submit the form
+                this.submit();
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

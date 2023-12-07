@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\voterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
-Route::get('/signup', function () {
+Route::get('/signup-page', function () {
     return view('signup');
 });
+
+
+Route::post('/signup', [voterController::class, 'signup']);

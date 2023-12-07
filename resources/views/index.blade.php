@@ -70,7 +70,7 @@
                     <br />
 
                     <button class="btn btn-outline-success m-1">Log in</button>
-                    <a href="/signup">
+                    <a href="/signup-page">
                         <button type="button" class="btn btn-outline-primary">
                             Sign up
                         </button>
