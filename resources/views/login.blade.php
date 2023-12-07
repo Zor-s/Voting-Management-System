@@ -29,7 +29,10 @@
 
 </head>
 
+
 <body>
+
+
     <div class="container">
         <div class="row d-md-flex justify-content-evenly m-5">
             <div class="col my-content  m-2">
@@ -45,15 +48,17 @@
             </div>
 
             <div class="col my-login-form  m-2">
-                <form method="POST" action="/voter" class="m-3">
+                <form method="POST" action="/login" class="m-3">
+                    @csrf
                     <h1>Log in</h1>
 
                     <label for="department_name">Department:</label>
                     <select class="form-select" id="department_name" name="department_name">
-                        <option selected>Department</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
+                        <option value="2">Institute of Computing (IC)</option>
+                        <option value="3">Institute of Leadership, Entrepreneurship and Good Governance (ILEGG)</option>
+                        <option value="4">Institute of Teacher Education (ITED)</option>
+                        <option value="5">Institute of Advanced Studies (IADS)</option>
                     </select>
 
                     <br />
@@ -85,6 +90,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

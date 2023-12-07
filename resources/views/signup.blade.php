@@ -30,11 +30,13 @@
                     <h1>Sign up</h1>
 
                     <label for="department_id">Department:</label>
-                    <select class="form-select" id="department_id" name="department_id">
+                    <select class="form-select" id="department_id" name="department_name">
                         <!-- <option selected>Department</option> -->
-                        <option value="1">1</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
+                        <option value="2">Institute of Computing (IC)</option>
+                        <option value="3">Institute of Leadership, Entrepreneurship and Good Governance (ILEGG)</option>
+                        <option value="4">Institute of Teacher Education (ITED)</option>
+                        <option value="5">Institute of Advanced Studies (IADS)</option>
                     </select>
 
                     <label for="voter_email">Voter email:</label>

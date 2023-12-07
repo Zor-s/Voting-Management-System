@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('login');
 });
+
 Route::get('/signup-page', function () {
     return view('signup');
 });
 
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 
 Route::post('/signup', [voterController::class, 'signup']);
+Route::post('/login', [voterController::class, 'login']);
+
