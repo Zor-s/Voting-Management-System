@@ -23,9 +23,13 @@ class adminFactory extends Factory
         $departmentId = department::pluck('id');
         $randomDepartmentId = $departmentId->random();
         return [
+            // "department_id"=> $randomDepartmentId,
+            // "admin_username"=> fake()->name,
+            // "admin_password"=> Hash::make('password'),
+
             "department_id"=> $randomDepartmentId,
-            "admin_username"=> fake()->name,
-            "admin_password"=> Hash::make('password'),
+            "admin_username"=> 'a',
+            "admin_password"=> Hash::make('a'),
         ];
     }
 }

@@ -18,14 +18,13 @@ class voterController extends Controller {
 
         ]);
         $department_name = $request->input('department_name');
-
         $voter_username = $request->input('voter_username');
         $voter_password = $request->input('voter_password');
 
-        $voter = Voter::where('voter_username', $voter_username)
+        $voter = voter::where('voter_username', $voter_username)
         ->where('department_id', $department_name)
         ->first();
-
+        
             
 
 
@@ -38,7 +37,6 @@ class voterController extends Controller {
                 return redirect('/');
             }
 
-        // TODO:modify later
 
     }
 

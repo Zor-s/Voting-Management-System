@@ -65,23 +65,19 @@
 
                     <br />
 
-                    <label for="voter_username">Voter username:</label>
-                    <input type="text" name="voter_username" id="voter_username" placeholder="Enter username"
+                    <label for="admin_username">Voter username:</label>
+                    <input type="text" name="admin_username" id="admin_username" placeholder="Enter username"
                         class="form-control" />
 
                     <br />
 
-                    <label for="voter_password">Voter password:</label>
-                    <input type="password" id="voter_password" name="voter_password" placeholder="Enter password"
+                    <label for="admin_password">Voter password:</label>
+                    <input type="password" id="admin_password" name="admin_password" placeholder="Enter password"
                         class="form-control" />
                     <br />
 
                     <button class="btn btn-outline-success m-1">Log in</button>
-                    <a href="/signup-page">
-                        <button type="button" class="btn btn-outline-primary">
-                            Sign up
-                        </button>
-                    </a>
+
 
                     <br />
 

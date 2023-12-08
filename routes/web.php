@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\voterController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,5 @@ Route::get('/admin', function () {
 
 Route::post('/signup', [voterController::class, 'signup']);
 Route::post('/login', [voterController::class, 'login']);
+Route::post('/login-admin', [adminController::class, 'loginAdmin']);
 
