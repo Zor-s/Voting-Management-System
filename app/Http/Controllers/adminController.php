@@ -18,21 +18,21 @@ class adminController extends Controller
 
     ]);
 
-    $department_name = $request->input('department_name');
+    $department_id = $request->input('department_name');
     $admin_username = $request->input('admin_username');
     $admin_password = $request->input('admin_password');
 
     $admin = admin::where('admin_username', $admin_username)
-    ->where('department_id', $department_name)
+    ->where('department_id', $department_id)
     ->first();
 
-    $departmentName = department::find($department_name); // $id is the productid value
+    $departmentName = department::find($department_id); // $id is the productid value
 
 
 
         if ($admin && Hash::check($admin_password, $admin->admin_password)) {
-
-            return view('adminDashboard', ['admin_username'=> $admin_username,  'department_name' => $departmentName->department_name]);
+            session(['admin_username'=> $admin_username,  'department_name' => $departmentName->department_name, 'department_id' => $department_id]);
+            return view('adminDashboard');
 
         } else {
 
