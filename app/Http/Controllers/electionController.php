@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class electionController extends Controller
 {
-    function addElection(Request $request){
+    function addElection(Request $request)
+    {
         $request->validate([
-            'election_start' => 'required',
-            'election_end' => 'required'
+            'election_start' => 'required|date|after:now',
+            'election_end' => 'required|date|after:election_start'
         ]);
 
         $election = election::create([
