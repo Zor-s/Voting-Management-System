@@ -39,19 +39,28 @@
 
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#election-creation-modal">
                     Start a new election
                 </button>
             </div>
             <div class="col-6">
                 <h1>Elections: </h1>
-                <p>{{session('election_name')}}</p>
                 @if (session('election_name'))
-                <a href="">
+                <p>
                     {{session('department_name')}}
-                </a>
+                </p>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                    data-bs-target="#election-deletion-modal">
+                    Edit election
+                </button>
+
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#election-deletion-modal">
+                    Delete election
+                </button>
                 @else
-                <p>User not found</p>
+                <p>No elections added</p>
                 @endif
 
 
@@ -60,12 +69,12 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="election-creation-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="election-creation-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">New election for: {{
+                    <h1 class="modal-title fs-5" id="election-creation-modal-label">New election for: {{
                         session('department_name')}}
                     </h1>
 
@@ -73,7 +82,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/add-election" class="form-control" id="electionForm">
+                    <form method="POST" action="/add-election" class="form-control" id="election-creation-form">
                         @csrf
 
                         <div class="row">
@@ -142,7 +151,57 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="electionFormSubmit" class="btn btn-success">Create</button>
+                    <button type="button" id="election-creation-submit-form" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="election-deletion-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="election-deletion-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="election-deletion-modal-label">Delete election: {{
+                        session('department_name')}}
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/delete-election" class="form-control" id="election-deletion-form">
+                        @csrf
+
+                        <p>Are you sure you want to delete this election?</p>
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="election-deletion-submit-form" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
@@ -156,23 +215,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <!-- 
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 
     <script>
         // Get the form element by its id
-        var form = document.getElementById("electionForm");
+        var creationForm = $("#election-creation-form");
 
         // Get the button element by its id
-        var button = document.getElementById("electionFormSubmit");
+        var creationButton = $("#election-creation-submit-form");
 
         // Add a click event listener to the button
-        button.addEventListener("click", function () {
+        creationButton.click(function () {
             // Submit the form
-            form.submit();
+            creationForm.submit();
         });
+
+
+        var deletionForm = $("#election-deletion-form");
+
+        var deletionButton = $("#election-deletion-submit-form");
+
+        deletionButton.click(function () {
+            // Submit the form
+            deletionForm.submit();
+        });
+
 
     </script>
 </body>

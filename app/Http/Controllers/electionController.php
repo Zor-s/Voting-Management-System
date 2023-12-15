@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class electionController extends Controller
 {
+
+
+    function deleteElection(){
+        
+        election::where('department_id', session('department_id'))->delete();
+        session()->forget('election_name');
+        return view('adminDashboard');
+    }
     function addElection(Request $request)
     {
         
@@ -27,7 +35,7 @@ class electionController extends Controller
         
         // find(session('department_id'));
         session(['election_name' => $electionName->department_id]);
-        return view('adminDashboard');;
+        return view('adminDashboard');
 
     }
 }

@@ -33,3 +33,4 @@ Route::post('/signup', [voterController::class, 'signup']);
 Route::post('/login', [voterController::class, 'login']);
 Route::post('/login-admin', [adminController::class, 'loginAdmin']);
 Route::post('/add-election', [electionController::class, 'addElection']);
+Route::post('/delete-election', [electionController::class, 'deleteElection']);
