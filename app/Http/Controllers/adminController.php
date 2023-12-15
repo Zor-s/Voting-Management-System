@@ -26,7 +26,7 @@ class adminController extends Controller
     ->where('department_id', $department_id)
     ->first();
 
-    $departmentName = department::find($department_id); // $id is the productid value
+    $departmentName = department::find($department_id); 
 
 
 

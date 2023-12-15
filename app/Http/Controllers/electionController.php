@@ -9,6 +9,7 @@ class electionController extends Controller
 {
     function addElection(Request $request)
     {
+        
         $request->validate([
             'election_start' => 'required|date|after:now',
             'election_end' => 'required|date|after:election_start'
@@ -21,6 +22,12 @@ class electionController extends Controller
 
 
         ]);
-        return view('adminDashboard');
+
+        $electionName = election::where('department_id', session('department_id'))->first();
+        
+        // find(session('department_id'));
+        session(['election_name' => $electionName->department_id]);
+        return view('adminDashboard');;
+
     }
 }
