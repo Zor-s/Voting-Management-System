@@ -52,7 +52,7 @@
                     {{session('department_name')}}
                 </p>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
                     data-bs-target="#candidate-creation-modal">
                     Add candidates
                 </button>
@@ -66,6 +66,28 @@
                     data-bs-target="#election-deletion-modal">
                     Delete election
                 </button>
+
+
+                <p>List of candidates</p>
+
+                <ol>
+                    @foreach (session('positions') as $position)
+                    <li>{{ $position->position_name }}
+                        <ol>
+                            @foreach (session('candidates') as $candidate)
+                            @if ($candidate->position_id == $position->id)
+                            <li>{{ $candidate->candidate_full_name }} - ({{ $candidate->candidate_party->candidate_party_name }})</li>
+                            @endif
+                            @endforeach
+                        </ol>
+                    </li>
+                    @endforeach
+                </ol>
+
+
+
+
+
                 @else
                 <p>No elections added</p>
                 @endif

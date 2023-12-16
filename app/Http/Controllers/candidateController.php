@@ -53,6 +53,11 @@ class candidateController extends Controller
 
         ]);
 
+        $positions = position::all();
+        $candidates = candidate::all();
+        $candidate_parties = candidate_party::all();
+
+        session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
 
         return view('adminDashboard');
     }

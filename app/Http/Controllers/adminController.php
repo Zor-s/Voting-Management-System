@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin;
+use App\Models\candidate;
+use App\Models\candidate_party;
 use App\Models\department;
 use App\Models\election;
+use App\Models\position;
 use App\Models\voter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -47,6 +50,12 @@ class adminController extends Controller
                 // do something else if no election was found
                 session(['election_department_id' => 0]);
             }
+
+            $positions = position::all();
+            $candidates = candidate::all();
+            $candidate_parties = candidate_party::all();
+
+            session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
 
             return view('adminDashboard');
 

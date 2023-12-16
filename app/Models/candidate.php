@@ -11,4 +11,9 @@ class candidate extends Model
 
     protected $fillable = ['position_id', 'department_id', 'candidate_party_id', 'candidate_full_name'];
 
+    public function candidate_party()
+    {
+        return $this->belongsTo(candidate_party::class);
+    }
+
 }
