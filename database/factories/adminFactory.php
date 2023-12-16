@@ -27,7 +27,7 @@ class adminFactory extends Factory
             // "admin_username"=> fake()->name,
             // "admin_password"=> Hash::make('password'),
 
-            "department_id"=> $randomDepartmentId,
+            "department_id"=> 1,
             "admin_username"=> 'a',
             "admin_password"=> Hash::make('a'),
         ];

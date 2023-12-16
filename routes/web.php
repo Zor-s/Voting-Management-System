@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\candidateController;
 use App\Http\Controllers\electionController;
 use App\Http\Controllers\voterController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,4 @@ Route::post('/login', [voterController::class, 'login']);
 Route::post('/login-admin', [adminController::class, 'loginAdmin']);
 Route::post('/add-election', [electionController::class, 'addElection']);
 Route::post('/delete-election', [electionController::class, 'deleteElection']);
+Route::post('/add-candidate', [candidateController::class, 'addCandidate']);

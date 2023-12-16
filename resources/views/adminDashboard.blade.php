@@ -43,13 +43,20 @@
                     data-bs-target="#election-creation-modal">
                     Start a new election
                 </button>
+
             </div>
             <div class="col-6">
                 <h1>Elections: </h1>
-                @if (session('election_department_name'))
+                @if (session('election_department_id'))
                 <p>
                     {{session('department_name')}}
                 </p>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#candidate-creation-modal">
+                    Add candidates
+                </button>
+
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                     data-bs-target="#election-deletion-modal">
                     Edit election
@@ -99,49 +106,6 @@
 
                         </div>
 
-
-                        <hr>
-
-                        <!-- <div class="row">
-                            <div class="col-4">
-                                <label for="department_name">Department:</label>
-                                <select class="form-select" id="department_name" name="department_name">
-                                    <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
-                                    <option value="2">Institute of Computing (IC)</option>
-                                    <option value="3">Institute of Leadership, Entrepreneurship and Good Governance
-                                        (ILEGG)</option>
-                                    <option value="4">Institute of Teacher Education (ITED)</option>
-                                    <option value="5">Institute of Advanced Studies (IADS)</option>
-                                </select>
-                            </div>
-
-                            <div class="col-4">
-                                <label for="department_name">Department:</label>
-                                <select class="form-select" id="department_name" name="department_name">
-                                    <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
-                                    <option value="2">Institute of Computing (IC)</option>
-                                    <option value="3">Institute of Leadership, Entrepreneurship and Good Governance
-                                        (ILEGG)</option>
-                                    <option value="4">Institute of Teacher Education (ITED)</option>
-                                    <option value="5">Institute of Advanced Studies (IADS)</option>
-                                </select>
-                            </div>
-
-
-
-
-                            <div class="col-4">
-                                <label for="department_name">Department:</label>
-                                <select class="form-select" id="department_name" name="department_name">
-                                    <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
-                                    <option value="2">Institute of Computing (IC)</option>
-                                    <option value="3">Institute of Leadership, Entrepreneurship and Good Governance
-                                        (ILEGG)</option>
-                                    <option value="4">Institute of Teacher Education (ITED)</option>
-                                    <option value="5">Institute of Advanced Studies (IADS)</option>
-                                </select>
-                            </div>
-                        </div> -->
 
 
                     </form>
@@ -211,6 +175,59 @@
 
 
 
+    <div class="modal fade" id="candidate-creation-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="candidate-creation-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="candidate-creation-modal-label">Add candidate for the election of:
+                        {{
+                        session('department_name')}}
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/add-candidate" class="form-control" id="candidate-creation-form">
+                        @csrf
+
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="text-nowrap" for="position_name">Candidate position:</label>
+                                <input class="form-control" type="text" name="position_name" id="position_name">
+                            </div>
+
+                            <div class="col-4">
+                                <label for="candidate_full_name">Candidate:</label>
+                                <input class="form-control" type="text" name="candidate_full_name"
+                                    id="candidate_full_name">
+                            </div>
+
+                            <div class="col-4">
+                                <label for="candidate_party_name">Candidate party:</label>
+                                <input class="form-control" type="text" name="candidate_party_name"
+                                    id="candidate_party_name">
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="candidate-creation-submit-form" class="btn btn-success">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -221,26 +238,36 @@
 
 
     <script>
-        // Get the form element by its id
-        var creationForm = $("#election-creation-form");
+        // Gelement by its id
+        var electionCreationForm = $("#election-creation-form");
 
         // Get the button element by its id
-        var creationButton = $("#election-creation-submit-form");
+        var electionCreationButton = $("#election-creation-submit-form");
 
         // Add a click event listener to the button
-        creationButton.click(function () {
+        electionCreationButton.click(function () {
             // Submit the form
-            creationForm.submit();
+            electionCreationForm.submit();
         });
 
 
-        var deletionForm = $("#election-deletion-form");
+        var electionDeletionForm = $("#election-deletion-form");
 
-        var deletionButton = $("#election-deletion-submit-form");
+        var electionDeletionButton = $("#election-deletion-submit-form");
 
-        deletionButton.click(function () {
-            // Submit the form
-            deletionForm.submit();
+        electionDeletionButton.click(function () {
+            electionDeletionForm.submit();
+        });
+
+
+        var candidateCreationForm = $("#candidate-creation-form");
+
+        var candidateCreationButton = $("#candidate-creation-submit-form");
+
+        candidateCreationButton.click(function () {
+            
+            candidateCreationForm.submit();
+
         });
 
 

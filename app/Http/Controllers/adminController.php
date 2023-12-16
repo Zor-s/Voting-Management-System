@@ -42,10 +42,10 @@ class adminController extends Controller
 
             if ($electionDepartmentName) {
                 // do something with $electionDepartmentName->department_id
-                session(['election_department_name' => $electionDepartmentName->department_id]);
+                session(['election_department_id' => $electionDepartmentName->department_id]);
             } else {
                 // do something else if no election was found
-                session(['election_department_name' => 0]);
+                session(['election_department_id' => 0]);
             }
 
             return view('adminDashboard');
