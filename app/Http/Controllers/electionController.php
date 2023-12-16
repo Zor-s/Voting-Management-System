@@ -12,9 +12,12 @@ class electionController extends Controller
     function deleteElection(){
         
         election::where('department_id', session('department_id'))->delete();
-        session()->forget('election_name');
+        session()->forget('election_department_name');
+
         return view('adminDashboard');
     }
+
+
     function addElection(Request $request)
     {
         
@@ -31,10 +34,8 @@ class electionController extends Controller
 
         ]);
 
-        $electionName = election::where('department_id', session('department_id'))->first();
-        
-        // find(session('department_id'));
-        session(['election_name' => $electionName->department_id]);
+        $electionDepartmentName = election::where('department_id', session('department_id'))->first();   
+        session(['election_department_name' => $electionDepartmentName->department_id]);
         return view('adminDashboard');
 
     }

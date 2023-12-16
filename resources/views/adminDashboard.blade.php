@@ -46,7 +46,7 @@
             </div>
             <div class="col-6">
                 <h1>Elections: </h1>
-                @if (session('election_name'))
+                @if (session('election_department_name'))
                 <p>
                     {{session('department_name')}}
                 </p>
