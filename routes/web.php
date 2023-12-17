@@ -3,7 +3,9 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\candidateController;
 use App\Http\Controllers\electionController;
+use App\Http\Controllers\positionController;
 use App\Http\Controllers\voterController;
+use App\Models\position;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +39,7 @@ Route::post('/add-election', [electionController::class, 'addElection']);
 Route::post('/delete-election', [electionController::class, 'deleteElection']);
 Route::post('/add-candidate', [candidateController::class, 'addCandidate']);
 Route::post('/edit-election', [electionController::class, 'editElection']);
+Route::post('/delete-candidate', [candidateController::class, 'deleteCandidate']);
+Route::post('/delete-position', [positionController::class, 'deletePosition']);
+
 

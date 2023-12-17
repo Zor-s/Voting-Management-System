@@ -61,4 +61,21 @@ class candidateController extends Controller
 
         return view('adminDashboard');
     }
+
+    function deleteCandidate(Request $request){
+        
+        candidate::where('id', $request->candidate_id)->delete();
+
+
+
+        $positions = position::all();
+        $candidates = candidate::all();
+        $candidate_parties = candidate_party::all();
+
+        session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
+
+        
+        return view('adminDashboard');
+
+    }
 }

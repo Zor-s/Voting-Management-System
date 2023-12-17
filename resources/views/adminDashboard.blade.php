@@ -76,17 +76,21 @@
                 <ol>
                     @foreach (session('positions') as $position)
                     <li>{{ $position->position_name }}
+
+                        <a href=""
+                            class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                            data-bs-toggle="modal" data-bs-target="#position-deletion-modal"
+                            data-position-id="{{ $position->id }}">Delete</a>
                         <ol>
                             @foreach (session('candidates') as $candidate)
                             @if ($candidate->position_id == $position->id)
-                            <li>{{ $candidate->candidate_full_name }} ({{
+                            <li>
+                                {{ $candidate->candidate_full_name }} ({{
                                 $candidate->candidate_party->candidate_party_name }})
                                 <a href=""
-                                    class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                    data-bs-toggle="modal" data-bs-target="#candidate-edit-modal">Edit</a>
-                                <a href=""
                                     class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                    data-bs-toggle="modal" data-bs-target="#candidate-deletion-modal">Delete</a>
+                                    data-bs-toggle="modal" data-bs-target="#candidate-deletion-modal"
+                                    data-candidate-id="{{ $candidate->id }}">Delete</a>
                             </li>
                             @endif
                             @endforeach
@@ -342,6 +346,7 @@
                 <div class="modal-body">
                     <form method="POST" action="/delete-candidate" class="form-control" id="candidate-deletion-form">
                         @csrf
+                        <input type="hidden" name="candidate_id" id="candidate_id" value="">
 
                         <p>Are you sure you want to delete this candidate?</p>
                     </form>
@@ -368,42 +373,27 @@
 
 
 
-    <div class="modal fade" id="candidate-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="candidate-edit-modal-label" aria-hidden="true">
+
+
+
+
+    <div class="modal fade" id="position-deletion-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="position-deletion-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="candidate-edit-modal-label">Edit candidate
+                    <h1 class="modal-title fs-5" id="position-deletion-modal-label">Delete position
                     </h1>
 
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/add-candidate" class="form-control" id="candidate-edit-form">
+                    <form method="POST" action="/delete-position" class="form-control" id="position-deletion-form">
                         @csrf
+                        <input type="hidden" name="position_id" id="position_id" value="">
 
-
-                        <div class="row">
-                            <div class="col-4">
-                                <label class="text-nowrap" for="position_name">Candidate position:</label>
-                                <input class="form-control" type="text" name="position_name" id="position_name">
-                            </div>
-
-                            <div class="col-4">
-                                <label for="candidate_full_name">Candidate:</label>
-                                <input class="form-control" type="text" name="candidate_full_name"
-                                    id="candidate_full_name">
-                            </div>
-
-                            <div class="col-4">
-                                <label for="candidate_party_name">Candidate party:</label>
-                                <input class="form-control" type="text" name="candidate_party_name"
-                                    id="candidate_party_name">
-                            </div>
-
-                        </div>
-
+                        <p>Are you sure you want to delete this position?</p>
                     </form>
 
                 </div>
@@ -411,11 +401,16 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="candidate-edit-submit-form" class="btn btn-success">Save changes</button>
+                    <button type="button" id="position-deletion-submit-form" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -481,13 +476,56 @@
 
 
 
-        var candidateEditForm = $("#candidate-edit-form");
 
-        var candidateEditLink = $("#candidate-edit-submit-form");
 
-        candidateEditLink.click(function () {
-            candidateEditForm.submit();
+
+
+        var positionDeletionForm = $("#position-deletion-form");
+
+        var positionDeletionLink = $("#position-deletion-submit-form");
+
+        positionDeletionLink.click(function () {
+            positionDeletionForm.submit();
         });
+
+
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            // Select all the anchor tags with data-candidate-id attribute
+            $("a[data-candidate-id]").on("click", function () {
+            // the candidate id from the data attribute
+                var candidate_id = $(this).data("candidate-id");
+                // Set the candidate id to the hidden input field in the form
+                $("#candidate_id").val(candidate_id);
+            });
+
+            
+        });
+
+
+        $(document).ready(function () {
+            // Select all the anchor tags with data-candidate-id attribute
+            $("a[data-position-id]").on("click", function () {
+            // the candidate id from the data attribute
+                var position_id = $(this).data("position-id");
+                // Set the candidate id to the hidden input field in the form
+                $("#position_id").val(position_id);
+            });
+
+            
+        });
+
+
+
 
     </script>
 </body>
