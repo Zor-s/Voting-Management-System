@@ -79,8 +79,15 @@
                         <ol>
                             @foreach (session('candidates') as $candidate)
                             @if ($candidate->position_id == $position->id)
-                            <li>{{ $candidate->candidate_full_name }} - ({{
-                                $candidate->candidate_party->candidate_party_name }})</li>
+                            <li>{{ $candidate->candidate_full_name }} ({{
+                                $candidate->candidate_party->candidate_party_name }})
+                                <a href=""
+                                    class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                    data-bs-toggle="modal" data-bs-target="#candidate-edit-modal">Edit</a>
+                                <a href=""
+                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                    data-bs-toggle="modal" data-bs-target="#candidate-deletion-modal">Delete</a>
+                            </li>
                             @endif
                             @endforeach
                         </ol>
@@ -293,7 +300,8 @@
 
                             <div class="col-6">
                                 <label for="edit_election_end">Election End(date and time):</label>
-                                <input class="form-control" type="datetime-local" id="edit_election_end" name="edit_election_end">
+                                <input class="form-control" type="datetime-local" id="edit_election_end"
+                                    name="edit_election_end">
                             </div>
 
                         </div>
@@ -318,6 +326,96 @@
 
 
 
+
+
+    <div class="modal fade" id="candidate-deletion-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="candidate-deletion-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="candidate-deletion-modal-label">Delete candidate
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/delete-candidate" class="form-control" id="candidate-deletion-form">
+                        @csrf
+
+                        <p>Are you sure you want to delete this candidate?</p>
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="candidate-deletion-submit-form" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="candidate-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="candidate-edit-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="candidate-edit-modal-label">Edit candidate
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/add-candidate" class="form-control" id="candidate-edit-form">
+                        @csrf
+
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="text-nowrap" for="position_name">Candidate position:</label>
+                                <input class="form-control" type="text" name="position_name" id="position_name">
+                            </div>
+
+                            <div class="col-4">
+                                <label for="candidate_full_name">Candidate:</label>
+                                <input class="form-control" type="text" name="candidate_full_name"
+                                    id="candidate_full_name">
+                            </div>
+
+                            <div class="col-4">
+                                <label for="candidate_party_name">Candidate party:</label>
+                                <input class="form-control" type="text" name="candidate_party_name"
+                                    id="candidate_party_name">
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="candidate-edit-submit-form" class="btn btn-success">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -371,6 +469,25 @@
             electionEditForm.submit();
         });
 
+
+        var candidateDeletionForm = $("#candidate-deletion-form");
+
+        var candidateDeletionLink = $("#candidate-deletion-submit-form");
+
+        candidateDeletionLink.click(function () {
+            candidateDeletionForm.submit();
+        });
+
+
+
+
+        var candidateEditForm = $("#candidate-edit-form");
+
+        var candidateEditLink = $("#candidate-edit-submit-form");
+
+        candidateEditLink.click(function () {
+            candidateEditForm.submit();
+        });
 
     </script>
 </body>
