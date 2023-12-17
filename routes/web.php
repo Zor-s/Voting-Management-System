@@ -36,3 +36,5 @@ Route::post('/login-admin', [adminController::class, 'loginAdmin']);
 Route::post('/add-election', [electionController::class, 'addElection']);
 Route::post('/delete-election', [electionController::class, 'deleteElection']);
 Route::post('/add-candidate', [candidateController::class, 'addCandidate']);
+Route::post('/edit-election', [electionController::class, 'editElection']);
+
