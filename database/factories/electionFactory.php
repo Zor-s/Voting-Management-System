@@ -21,7 +21,7 @@ class electionFactory extends Factory
         $randomDepartmentId = $departmentId->random();
 
         return [
-            'department_id'=> $randomDepartmentId,
+            'department_id'=> 1,
             "election_start"=> fake()->dateTime(),
             "election_end"=> fake()->dateTime(),
 

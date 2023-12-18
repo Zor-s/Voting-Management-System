@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\candidate;
+use App\Models\candidate_party;
+use App\Models\department;
+use App\Models\election;
+use App\Models\position;
 use App\Models\voter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,13 +32,47 @@ class voterController extends Controller
             ->where('department_id', $department_id)
             ->first();
 
+            $departmentName = department::find($department_id);
 
+            session(['voter_username' => $voter_username, 'department_name' => $departmentName->department_name, 'department_id' => $department_id]);
+    
+            $electionDepartmentName = election::where('department_id', session('department_id'))->first();
+    
 
 
         if ($voter && Hash::check($voter_password, $voter->voter_password)) {
 
-            return view('dashboard', ['voter_username' => $voter_username]);
+            if ($electionDepartmentName) {
+                // do something with $electionDepartmentName->department_id
+                session(['election_department_id' => $electionDepartmentName->department_id]);
+            } else {
+                // do something else if no election was found
+                session(['election_department_id' => 0]);
+            }
 
+
+            $election = election::find(session('department_id'));
+
+            if ($election) {
+                # code...
+                session(['election_start' => $election->election_start, 'election_end' => $election->election_end]);
+            }else {
+                # code...
+                session(['election_start' => 0, 'election_end' => 0]);
+
+            }
+
+
+            $positions = position::all();
+            $candidates = candidate::all();
+            $candidate_parties = candidate_party::all();
+
+            
+
+            session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
+
+
+            return view('dashboard');
         } else {
 
             return redirect('/');

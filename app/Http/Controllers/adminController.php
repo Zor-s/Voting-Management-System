@@ -55,8 +55,21 @@ class adminController extends Controller
             $candidates = candidate::all();
             $candidate_parties = candidate_party::all();
 
-            session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
+            $election = election::find(session('department_id'));
 
+            if ($election) {
+                # code...
+                session(['election_start' => $election->election_start, 'election_end' => $election->election_end]);
+            }else {
+                # code...
+                session(['election_start' => 0, 'election_end' => 0]);
+
+            }
+
+
+
+
+            session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
             return view('adminDashboard');
 
         } else {

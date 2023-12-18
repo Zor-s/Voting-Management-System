@@ -83,8 +83,7 @@
                             data-position-id="{{ $position->id }}">Delete</a>
                         <ol>
                             @foreach (session('candidates') as $candidate)
-                            @if ($candidate->position_id == $position->id)
-                            <li>
+                            @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))                            <li>
                                 {{ $candidate->candidate_full_name }} ({{
                                 $candidate->candidate_party->candidate_party_name }})
                                 <a href=""

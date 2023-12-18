@@ -32,8 +32,8 @@ class candidateFactory extends Factory
             'position_id'=> $randomPositionId,
             'candidate_party_id'=> $randomCandidatePartyId,
             'department_id'=> $randomDepartmentId,
-            "candidate_first_name"=> fake()->name(),
-            "candidate_last_name"=> fake()->lastName(),
+            "candidate_full_name"=> fake()->name(),
+
         ];
     }
 }

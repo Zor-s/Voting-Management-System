@@ -21,11 +21,12 @@ class DatabaseSeeder extends Seeder
         )->create();
         \App\Models\admin::factory(1)->create();
 
-        // \App\Models\position::factory(10)->create();
-        // \App\Models\candidate_party::factory(10)->create();
-        // \App\Models\candidate::factory(10)->create();
-        // \App\Models\voter::factory(10)->create();
-        // \App\Models\election::factory(10)->create();
+        \App\Models\voter::factory(1)->create();
+
+        \App\Models\position::factory(10)->create();
+        \App\Models\candidate_party::factory(10)->create();
+        \App\Models\candidate::factory(10)->create();
+        \App\Models\election::factory(1)->create();
         // \App\Models\ballot::factory(10)->create();
         // \App\Models\feedback::factory(10)->create();
         // \App\Models\voting_result::factory(10)->create();

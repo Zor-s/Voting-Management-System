@@ -24,9 +24,9 @@ class voterFactory extends Factory
         $randomDepartmentId = $departmentId->random();
 
         return [
-            'department_id' => $randomDepartmentId,
-            'voter_username' => fake()->name(),
-            'voter_password' => Hash::make('password'),
+            'department_id' => 1,
+            'voter_username' => 'a',
+            'voter_password' => Hash::make('a'),
             'voter_email' => fake()->unique()->safeEmail(),
             'voter_gender' => $this->faker->randomElement(['male', 'female']),
             'voter_age' => fake()->randomDigit(),
