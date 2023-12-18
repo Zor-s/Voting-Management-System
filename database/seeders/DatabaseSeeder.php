@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\voter::factory(1)->create();
 
-        \App\Models\position::factory(10)->create();
-        \App\Models\candidate_party::factory(10)->create();
-        \App\Models\candidate::factory(10)->create();
+        \App\Models\position::factory(3)->create();
+        \App\Models\candidate_party::factory(3)->create();
+        \App\Models\candidate::factory(3)->create();
         \App\Models\election::factory(1)->create();
         // \App\Models\ballot::factory(10)->create();
         // \App\Models\feedback::factory(10)->create();

@@ -115,12 +115,13 @@
                                         <ol>
                                             @foreach (session('candidates') as $candidate)
                                                 @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
-                                                    <li>
+                                                    <li>                                     
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="{{ $position->id }}"
-                                                                id="{{ $candidate->id }}">
+                                                                id="{{ $candidate->id }}"
+                                                                value="{{ $candidate->id }}">
                                                             <label class="form-check-label"
                                                                 for="{{ $candidate->id }}">
                                                                 {{ $candidate->candidate_full_name }}
@@ -130,6 +131,7 @@
 
                                                     </li>
                                                 @endif
+
                                             @endforeach
                                         </ol>
                                     </li>
