@@ -37,9 +37,16 @@
         <div class="row">
             <div class="col-6">
                 <h1>Welcome! {{ session('voter_username') }}</h1>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#voting-modal">
-                    Vote now!
-                </button>
+                @if (session('election_department_id'))
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#voting-modal">
+                        Vote now!
+                    </button>
+                @else
+                    <button disabled type="button" class="btn btn-primary">
+                        Vote now!
+                    </button>
+                @endif
 
             </div>
             <div class="col-6">
@@ -51,8 +58,9 @@
                     <p>Start: {{ session('election_start') }}</p>
                     <p>End: {{ session('election_end') }}</p>
 
+                    <p>List of candidates:</p>
 
-                    <ol>
+                    <ul>
                         @foreach (session('positions') as $position)
                             <li>{{ $position->position_name }}
 
@@ -63,14 +71,13 @@
                                             <li>
                                                 {{ $candidate->candidate_full_name }}
                                                 ({{ $candidate->candidate_party->candidate_party_name }})
-
                                             </li>
                                         @endif
                                     @endforeach
                                 </ol>
                             </li>
                         @endforeach
-                    </ol>
+                    </ul>
                 @else
                     <p>No elections added</p>
                 @endif
@@ -88,7 +95,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="voting-modal-label">Delete election:
+                        <h1 class="modal-title fs-5" id="voting-modal-label">Vote for the election of:
                             {{ session('department_name') }}
                         </h1>
 
@@ -98,8 +105,37 @@
                     <div class="modal-body">
                         <form method="POST" action="/vote" class="form-control" id="voting-form">
                             @csrf
+                            <p>List of candidates:</p>
 
-                            <p>Are you sure you want to delete this election?</p>
+
+                            <ul>
+                                @foreach (session('positions') as $position)
+                                    <li>{{ $position->position_name }}
+
+                                        <ol>
+                                            @foreach (session('candidates') as $candidate)
+                                                @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
+                                                    <li>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="{{ $position->id }}"
+                                                                id="{{ $candidate->id }}">
+                                                            <label class="form-check-label"
+                                                                for="{{ $candidate->id }}">
+                                                                {{ $candidate->candidate_full_name }}
+                                                                ({{ $candidate->candidate_party->candidate_party_name }})
+                                                            </label>
+                                                        </div>
+
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ol>
+                                    </li>
+                                @endforeach
+                            </ul>
+
                         </form>
 
                     </div>
@@ -107,7 +143,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="voting-submit-form" class="btn btn-danger">Delete</button>
+                        <button type="button" id="voting-submit-form" class="btn btn-success">Cast vote</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\ballotController;
 use App\Http\Controllers\candidateController;
 use App\Http\Controllers\electionController;
 use App\Http\Controllers\positionController;
@@ -41,5 +42,7 @@ Route::post('/add-candidate', [candidateController::class, 'addCandidate']);
 Route::post('/edit-election', [electionController::class, 'editElection']);
 Route::post('/delete-candidate', [candidateController::class, 'deleteCandidate']);
 Route::post('/delete-position', [positionController::class, 'deletePosition']);
+Route::post('/vote', [ballotController::class, 'castVote']);
+
 
 

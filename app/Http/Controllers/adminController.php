@@ -55,7 +55,7 @@ class adminController extends Controller
             $candidates = candidate::all();
             $candidate_parties = candidate_party::all();
 
-            $election = election::find(session('department_id'));
+            $election = election::where('department_id',session('department_id'))->first();
 
             if ($election) {
                 # code...

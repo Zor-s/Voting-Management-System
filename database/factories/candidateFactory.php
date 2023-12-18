@@ -31,7 +31,7 @@ class candidateFactory extends Factory
         return [
             'position_id'=> $randomPositionId,
             'candidate_party_id'=> $randomCandidatePartyId,
-            'department_id'=> $randomDepartmentId,
+            'department_id'=> 1,
             "candidate_full_name"=> fake()->name(),
 
         ];

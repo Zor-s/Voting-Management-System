@@ -51,7 +51,7 @@ class voterController extends Controller
             }
 
 
-            $election = election::find(session('department_id'));
+            $election = election::where('department_id',session('department_id'))->first();
 
             if ($election) {
                 # code...
@@ -120,7 +120,11 @@ class voterController extends Controller
 
         }
 
-
-
     }
+
+
+
+
+
+    
 }
