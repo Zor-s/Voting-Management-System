@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
-        <div class="container-fluid mx-5">
+        <div class="container-fluid px-5">
             <!-- <a class="navbar-brand disabled" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,9 +37,9 @@
         </div>
     </nav>
 
-    <div class="container m-5">
+    <div class="container p-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-6 col-12 m-auto">
 
                 <h1>Welcome, admin {{ session('admin_username') }}!</h1>
 
@@ -51,7 +51,7 @@
                 </button>
 
             </div>
-            <div class="col-6">
+            <div class="col-sm-6 col-12 m-auto">
                 <h1>Elections: </h1>
                 @if (session('election_department_id'))
                     <p>

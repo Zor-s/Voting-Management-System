@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
-        <div class="container-fluid mx-5">
+        <div class="container-fluid px-5">
             <!-- <a class="navbar-brand disabled" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,9 +37,9 @@
 
 
 
-    <div class="container m-5">
+    <div class="container p-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-6 col-12 m-auto">
                 <h1>Welcome, voter {{ session('voter_username') }}!</h1>
                 @if (session('election_department_id') && !session('has_voted'))
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -53,7 +53,7 @@
                 @endif
 
             </div>
-            <div class="col-6">
+            <div class="col-sm-6 col-12 m-auto">
                 <h1>Elections: </h1>
                 @if (session('election_department_id'))
                     <p>
