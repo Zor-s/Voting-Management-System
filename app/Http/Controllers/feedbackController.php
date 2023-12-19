@@ -8,28 +8,40 @@ use Illuminate\Http\Request;
 
 class feedbackController extends Controller
 {
-    function submitFeedback(Request $request){
-
-        $request->validate([
-            'rating' => 'required',
-        ]);
-
+    function submitFeedback(Request $request)
+    {
+        if (!session('has_feedback')) {
+            # code...
 
 
 
+            $request->validate([
+                'rating' => 'required',
+            ]);
 
-        feedback::create([
-            'voter_id' => session('voter_id'),
-            'feedback_rating' => $request->rating,
-            'feedback_comment' => $request->feedback
 
-        ]);
 
-        $voter = voter::find(session('voter_id'));
-        $voter->has_feedback = true;
-        $voter->save();
 
-        session(['has_feedback' => $voter->has_feedback]);
-        return view('dashboard');
+
+            feedback::create([
+                'voter_id' => session('voter_id'),
+                'feedback_rating' => $request->rating,
+                'feedback_comment' => $request->feedback
+
+            ]);
+
+            $voter = voter::find(session('voter_id'));
+            $voter->has_feedback = true;
+            $voter->save();
+
+            session(['has_feedback' => $voter->has_feedback]);
+            return view('dashboard');
+        } else {
+            # code...
+            return view('dashboard');
+
+        }
+
+
     }
 }
