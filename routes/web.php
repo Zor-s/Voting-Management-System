@@ -33,7 +33,6 @@ Route::get('/admin', function () {
     return view('admin');
 });
 
-
 Route::post('/signup', [voterController::class, 'signup']);
 Route::post('/login', [voterController::class, 'login']);
 Route::post('/login-admin', [adminController::class, 'loginAdmin']);
@@ -47,4 +46,9 @@ Route::post('/vote', [ballotController::class, 'castVote']);
 Route::post('/feedback', [feedbackController::class, 'submitFeedback']);
 
 
+Route::post('/logout',  function () {
+    session()->flush();
+
+    return view('login');
+});
 

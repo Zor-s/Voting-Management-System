@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
@@ -24,8 +24,14 @@
             <div class="collapse navbar-collapse row" id="navbarNavAltMarkup">
                 <div class="navbar-nav d-flex justify-content-center">
                     <a class="nav-link active col" aria-current="page"></a>
-                    <a class="nav-link col" href="" data-bs-toggle="modal" data-bs-target="#voting-result-modal">Voting result</a>
-                    <a class="nav-link col" href="/admin">logout</a>
+                    <a class="nav-link col" href="" data-bs-toggle="modal"
+                        data-bs-target="#voting-result-modal">Voting result</a>
+                    <a href="/logout"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -133,7 +139,8 @@
 
                             <div class="col-6">
                                 <label for="election_end">Election End(date and time):</label>
-                                <input class="form-control" type="datetime-local" id="election_end" name="election_end">
+                                <input class="form-control" type="datetime-local" id="election_end"
+                                    name="election_end">
                             </div>
 
                         </div>
@@ -424,7 +431,7 @@
 
 
 
-                <ul>
+                    <ul>
                         @foreach (session('positions') as $position)
                             <li>{{ $position->position_name }}
 
@@ -434,8 +441,10 @@
                                         @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
                                             <li>
                                                 {{ $candidate->candidate_full_name }}
-                                                ({{ $candidate->candidate_party->candidate_party_name }}) -
+                                                ({{ $candidate->candidate_party->candidate_party_name }})
+                                                -
                                                 {{ \App\Http\Controllers\votingResultController::voteCounter($candidate->id) }}
+                                                Votes
                                             </li>
                                         @endif
                                     @endforeach
@@ -544,9 +553,6 @@
         positionDeletionLink.click(function() {
             positionDeletionForm.submit();
         });
-
-
-
 
 
 

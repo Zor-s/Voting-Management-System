@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
@@ -23,9 +23,13 @@
 
             <div class="collapse navbar-collapse row" id="navbarNavAltMarkup">
                 <div class="navbar-nav d-flex justify-content-center">
-                    <a class="nav-link active col" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active col" aria-current="page" href="#"></a>
                     <a class="nav-link col" href="#">Voting result</a>
-                    <a class="nav-link col" href="/">logout</a>
+                    <a href="/logout"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
@@ -167,42 +171,49 @@
                         <div class="modal-body">
                             <form method="POST" action="/feedback" class="form-control" id="feedback-form">
                                 @csrf
-                                <p>Thank you for participating in our voting system! Your feedback is essential for the ongoing improvement of our voting system. We welcome all comments, whether positive or critical, as they provide valuable insights into areas where we can enhance our service. If you encountered any challenges or have suggestions for improvement, please take a moment to share them with us. We genuinely appreciate your input and are dedicated to addressing any concerns to ensure an even better voting experience for everyone.</p>
-        <p>Rate us:</p>
+                                <p>Thank you for participating in our voting system! Your feedback is essential for the
+                                    ongoing improvement of our voting system. We welcome all comments, whether positive
+                                    or critical, as they provide valuable insights into areas where we can enhance our
+                                    service. If you encountered any challenges or have suggestions for improvement,
+                                    please take a moment to share them with us. We genuinely appreciate your input and
+                                    are dedicated to addressing any concerns to ensure an even better voting experience
+                                    for everyone.</p>
+                                <p>Rate us:</p>
                                 <div class="d-flex justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rating"
-                                        id="radio1" value="1">
-                                    <label class="form-check-label" for="radio1">1</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rating"
-                                        id="radio2" value="2">
-                                    <label class="form-check-label" for="radio2">2</label>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="radio1"
+                                            value="1">
+                                        <label class="form-check-label" for="radio1">1</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="radio2"
+                                            value="2">
+                                        <label class="form-check-label" for="radio2">2</label>
+                                    </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rating"
-                                        id="radio3" value="3" >
-                                    <label class="form-check-label" for="radio3">3</label>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="radio3"
+                                            value="3">
+                                        <label class="form-check-label" for="radio3">3</label>
+                                    </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rating"
-                                        id="radio4" value="4">
-                                    <label class="form-check-label" for="radio4">4</label>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="radio4"
+                                            value="4">
+                                        <label class="form-check-label" for="radio4">4</label>
+                                    </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rating"
-                                        id="radio5" value="5">
-                                    <label class="form-check-label" for="radio5">5</label>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="radio5"
+                                            value="5">
+                                        <label class="form-check-label" for="radio5">5</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-  <label for="feedbackComment">Feedback: (optional)</label>
-  <textarea name="feedback" class="form-control" id="feedbackComment" rows="3" placeholder="Your feedback goes here..."></textarea>
-</div>
+                                    <label for="feedbackComment">Feedback: (optional)</label>
+                                    <textarea name="feedback" class="form-control" id="feedbackComment" rows="3"
+                                        placeholder="Your feedback goes here..."></textarea>
+                                </div>
 
 
                             </form>
@@ -256,11 +267,11 @@
 
             var feedbackForm = $("#feedback-form");
 
-var feedbackButton = $("#feedback-submit-form");
+            var feedbackButton = $("#feedback-submit-form");
 
-feedbackButton.click(function() {
-    feedbackForm.submit();
-});
+            feedbackButton.click(function() {
+                feedbackForm.submit();
+            });
         </script>
 </body>
 
