@@ -115,15 +115,13 @@
                                         <ol>
                                             @foreach (session('candidates') as $candidate)
                                                 @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
-                                                    <li>                                     
+                                                    <li>
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="{{ $position->id }}"
-                                                                id="{{ $candidate->id }}"
+                                                                name="{{ $position->id }}" id="{{ $candidate->id }}"
                                                                 value="{{ $candidate->id }}">
-                                                            <label class="form-check-label"
-                                                                for="{{ $candidate->id }}">
+                                                            <label class="form-check-label" for="{{ $candidate->id }}">
                                                                 {{ $candidate->candidate_full_name }}
                                                                 ({{ $candidate->candidate_party->candidate_party_name }})
                                                             </label>
@@ -131,7 +129,6 @@
 
                                                     </li>
                                                 @endif
-
                                             @endforeach
                                         </ol>
                                     </li>
@@ -145,7 +142,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="voting-submit-form" class="btn btn-success">Cast vote</button>
+                        <button type="button" id="voting-submit-form" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#feedback-modal">Cast vote</button>
                     </div>
                 </div>
             </div>
@@ -154,36 +152,72 @@
 
 
 
-
-        <div class="modal fade" id="feedback-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="feedback-modal-label" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="feedback-modal-label">Vote for the election of:
-                            {{ session('department_name') }}
-                        </h1>
-
-
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="/vote" class="form-control" id="feedback-form">
-                            @csrf
-      
-                        </form>
-
-                    </div>
+        @if (session('has_voted'))
+            <div class="modal fade" id="feedback-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="feedback-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="feedback-modal-label">Voting System Feedback Form
+                            </h1>
 
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" id="feedback-submit-form" class="btn btn-success">Submit</button>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="/feedback" class="form-control" id="feedback-form">
+                                @csrf
+                                <p>Thank you for participating in our voting system! Your feedback is essential for the ongoing improvement of our voting system. We welcome all comments, whether positive or critical, as they provide valuable insights into areas where we can enhance our service. If you encountered any challenges or have suggestions for improvement, please take a moment to share them with us. We genuinely appreciate your input and are dedicated to addressing any concerns to ensure an even better voting experience for everyone.</p>
+        <p>Rate us:</p>
+                                <div class="d-flex justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rating"
+                                        id="radio1" value="1">
+                                    <label class="form-check-label" for="radio1">1</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rating"
+                                        id="radio2" value="2">
+                                    <label class="form-check-label" for="radio2">2</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rating"
+                                        id="radio3" value="3" >
+                                    <label class="form-check-label" for="radio3">3</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rating"
+                                        id="radio4" value="4">
+                                    <label class="form-check-label" for="radio4">4</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rating"
+                                        id="radio5" value="5">
+                                    <label class="form-check-label" for="radio5">5</label>
+                                </div>
+                                </div>
+                                <div class="form-group">
+  <label for="feedbackComment">Feedback: (optional)</label>
+  <textarea name="feedback" class="form-control" id="feedbackComment" rows="3" placeholder="Your feedback goes here..."></textarea>
+</div>
+
+
+                            </form>
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="feedback-submit-form" class="btn btn-success">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+        @endif
 
 
 
@@ -213,6 +247,20 @@
             votingButton.click(function() {
                 votingForm.submit();
             });
+
+
+            $(document).ready(function() {
+                $('#feedback-modal').modal('show');
+            });
+
+
+            var feedbackForm = $("#feedback-form");
+
+var feedbackButton = $("#feedback-submit-form");
+
+feedbackButton.click(function() {
+    feedbackForm.submit();
+});
         </script>
 </body>
 

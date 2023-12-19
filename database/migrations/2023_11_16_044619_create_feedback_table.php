@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('voter_id')->constrained('voters')->cascadeOnDelete();
             $table->integer('feedback_rating');
-            $table->string('feedback_comment');
+            $table->string('feedback_comment')->nullable();
             $table->timestamps();
         });
     }

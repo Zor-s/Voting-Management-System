@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ballotController extends Controller
 {
 
-    public function castVote(Request $request)
+    function castVote(Request $request)
     {
 
         $positions = session('positions');
