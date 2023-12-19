@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('voting_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ballot_id')->constrained('ballots')->cascadeOnDelete();
             $table->foreignId('candidate_id')->constrained('candidates')->cascadeOnDelete();
             $table->integer('number_of_votes');
             $table->timestamps();
