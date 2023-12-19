@@ -24,7 +24,8 @@
             <div class="collapse navbar-collapse row" id="navbarNavAltMarkup">
                 <div class="navbar-nav d-flex justify-content-center">
                     <a class="nav-link active col" aria-current="page" href="#"></a>
-                    <a class="nav-link col" href="#">Voting result</a>
+                    <a class="nav-link col" href="" data-bs-toggle="modal"
+                        data-bs-target="#voting-result-modal">Voting result</a>
                     <a href="/logout"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="/logout" method="POST" style="display: none;">
@@ -236,6 +237,63 @@
 
 
 
+
+
+
+
+
+
+
+
+        <div class="modal fade" id="voting-result-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="voting-result-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="voting-result-modal-label">Voting result
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <ul>
+                        @foreach (session('positions') as $position)
+                            <li>{{ $position->position_name }}
+
+
+                                <ol>
+                                    @foreach (session('candidates') as $candidate)
+                                        @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
+                                            <li>
+                                                {{ $candidate->candidate_full_name }}
+                                                ({{ $candidate->candidate_party->candidate_party_name }})
+                                                -
+                                                {{ \App\Http\Controllers\votingResultController::voteCounter($candidate->id) }}
+                                                Vote/s
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ol>
+                            </li>
+                        @endforeach
+                    </ul>
+
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" id="voting-result-submit-form" class="btn btn-danger">Delete</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -20,11 +20,11 @@
         } */
 
 
-        @media screen and (max-width: 768px) {
+        /* @media screen and (max-width: 768px) {
             .container .row {
                 flex-direction: column;
             }
-        }
+        } */
     </style>
 
 </head>
@@ -34,8 +34,8 @@
 
 
     <div class="container">
-        <div class="row d-md-flex justify-content-evenly m-5">
-            <div class="col my-content  m-2">
+        <div class="row my-5 mx-1">
+            <div class="my-content col-sm-6 col-12 m-auto">
                 <h1>Voting Management System</h1>
                 <br />
                 <p>
@@ -47,7 +47,7 @@
                 </p>
             </div>
 
-            <div class="col my-login-form  m-2">
+            <div class="my-login-form col-sm-6 col-12 m-auto">
                 <form method="POST" action="/login" class="m-3">
                     @csrf
                     <h1>Log in</h1>

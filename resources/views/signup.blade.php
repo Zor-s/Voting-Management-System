@@ -11,20 +11,20 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
     <style>
-        @media screen and (max-width: 767px) {
+        /* @media screen and (max-width: 767px) {
             .container .row {
                 flex-direction: column;
             }
-        }
+        } */
     </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-evenly m-5">
+    <div class="container">
+        <div class="row mx-1 my-5">
 
 
-            <div class="col my-login-form  m-2 p-4">
+            <div class="my-login-form col-sm-6 col-12 m-auto">
                 <form id="voterForm" method="POST" action="/signup" class="">
                     @csrf
                     <h1>Sign up</h1>
@@ -88,7 +88,7 @@
                 </form>
             </div>
 
-            <div class="col my-content  m-2">
+            <div class="my-content col-sm-6 col-12 m-auto pt-3">
                 <h1>Register to Vote: Your Voice, Your Choice!</h1>
                 <br>
                 <p>Welcome to our voter registration page! Exercise your democratic right by signing up to vote in

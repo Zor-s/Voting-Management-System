@@ -444,7 +444,7 @@
                                                 ({{ $candidate->candidate_party->candidate_party_name }})
                                                 -
                                                 {{ \App\Http\Controllers\votingResultController::voteCounter($candidate->id) }}
-                                                Votes
+                                                Vote/s
                                             </li>
                                         @endif
                                     @endforeach
