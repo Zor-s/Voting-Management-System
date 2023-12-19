@@ -48,62 +48,58 @@
             <div class="col-6">
                 <h1>Elections: </h1>
                 @if (session('election_department_id'))
-                <p>
-                    {{session('department_name')}}
-                </p>
+                    <p>
+                        {{ session('department_name') }}
+                    </p>
 
-                <p>Start: {{session('election_start')}}</p>
-                <p>End: {{session('election_end')}}</p>
+                    <p>Start: {{ session('election_start') }}</p>
+                    <p>End: {{ session('election_end') }}</p>
 
-                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                    data-bs-target="#candidate-creation-modal">
-                    Add candidates
-                </button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#candidate-creation-modal">
+                        Add candidates
+                    </button>
 
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                    data-bs-target="#election-edit-modal">
-                    Edit election
-                </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#election-edit-modal">
+                        Edit election
+                    </button>
 
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#election-deletion-modal">
-                    Delete election
-                </button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#election-deletion-modal">
+                        Delete election
+                    </button>
 
 
-                <p>List of candidates</p>
+                    <p>List of candidates</p>
 
-                <ol>
-                    @foreach (session('positions') as $position)
-                    <li>{{ $position->position_name }}
+                    <ol>
+                        @foreach (session('positions') as $position)
+                            <li>{{ $position->position_name }}
 
-                        <a href=""
-                            class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                            data-bs-toggle="modal" data-bs-target="#position-deletion-modal"
-                            data-position-id="{{ $position->id }}">Delete</a>
-                        <ol>
-                            @foreach (session('candidates') as $candidate)
-                            @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))                            <li>
-                                {{ $candidate->candidate_full_name }} ({{
-                                $candidate->candidate_party->candidate_party_name }})
                                 <a href=""
                                     class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                    data-bs-toggle="modal" data-bs-target="#candidate-deletion-modal"
-                                    data-candidate-id="{{ $candidate->id }}">Delete</a>
+                                    data-bs-toggle="modal" data-bs-target="#position-deletion-modal"
+                                    data-position-id="{{ $position->id }}">Delete</a>
+                                <ol>
+                                    @foreach (session('candidates') as $candidate)
+                                        @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
+                                            <li>
+                                                {{ $candidate->candidate_full_name }}
+                                                ({{ $candidate->candidate_party->candidate_party_name }})
+                                                <a href=""
+                                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                                    data-bs-toggle="modal" data-bs-target="#candidate-deletion-modal"
+                                                    data-candidate-id="{{ $candidate->id }}">Delete</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ol>
                             </li>
-                            @endif
-                            @endforeach
-                        </ol>
-                    </li>
-                    @endforeach
-                </ol>
-
-
-
-
-
+                        @endforeach
+                    </ol>
                 @else
-                <p>No elections added</p>
+                    <p>No elections added</p>
                 @endif
 
 
@@ -117,8 +113,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="election-creation-modal-label">New election for: {{
-                        session('department_name')}}
+                    <h1 class="modal-title fs-5" id="election-creation-modal-label">New election for:
+                        {{ session('department_name') }}
                     </h1>
 
 
@@ -182,8 +178,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="election-deletion-modal-label">Delete election: {{
-                        session('department_name')}}
+                    <h1 class="modal-title fs-5" id="election-deletion-modal-label">Delete election:
+                        {{ session('department_name') }}
                     </h1>
 
 
@@ -216,9 +212,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="candidate-creation-modal-label">Add candidate for the election of:
-                        {{
-                        session('department_name')}}
+                    <h1 class="modal-title fs-5" id="candidate-creation-modal-label">Add candidate for the election
+                        of:
+                        {{ session('department_name') }}
                     </h1>
 
 
@@ -278,13 +274,13 @@
 
 
 
-    <div class="modal fade" id="election-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="election-edit-modal-label" aria-hidden="true">
+    <div class="modal fade" id="election-edit-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="election-edit-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="election-edit-modal-label">Edit election for: {{
-                        session('department_name')}}
+                    <h1 class="modal-title fs-5" id="election-edit-modal-label">Edit election for:
+                        {{ session('department_name') }}
                     </h1>
 
 
@@ -318,7 +314,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="election-edit-submit-form" class="btn btn-success">Save changes</button>
+                    <button type="button" id="election-edit-submit-form" class="btn btn-success">Save
+                        changes</button>
                 </div>
             </div>
         </div>
@@ -343,7 +340,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/delete-candidate" class="form-control" id="candidate-deletion-form">
+                    <form method="POST" action="/delete-candidate" class="form-control"
+                        id="candidate-deletion-form">
                         @csrf
                         <input type="hidden" name="candidate_id" id="candidate_id" value="">
 
@@ -415,8 +413,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -430,7 +428,7 @@
         var electionCreationButton = $("#election-creation-submit-form");
 
         // Add a click event listener to the button
-        electionCreationButton.click(function () {
+        electionCreationButton.click(function() {
             // Submit the form
             electionCreationForm.submit();
         });
@@ -440,7 +438,7 @@
 
         var electionDeletionButton = $("#election-deletion-submit-form");
 
-        electionDeletionButton.click(function () {
+        electionDeletionButton.click(function() {
             electionDeletionForm.submit();
         });
 
@@ -449,7 +447,7 @@
 
         var candidateCreationButton = $("#candidate-creation-submit-form");
 
-        candidateCreationButton.click(function () {
+        candidateCreationButton.click(function() {
             candidateCreationForm.submit();
 
         });
@@ -459,7 +457,7 @@
 
         var electionEditButton = $("#election-edit-submit-form");
 
-        electionEditButton.click(function () {
+        electionEditButton.click(function() {
             electionEditForm.submit();
         });
 
@@ -468,7 +466,7 @@
 
         var candidateDeletionLink = $("#candidate-deletion-submit-form");
 
-        candidateDeletionLink.click(function () {
+        candidateDeletionLink.click(function() {
             candidateDeletionForm.submit();
         });
 
@@ -483,7 +481,7 @@
 
         var positionDeletionLink = $("#position-deletion-submit-form");
 
-        positionDeletionLink.click(function () {
+        positionDeletionLink.click(function() {
             positionDeletionForm.submit();
         });
 
@@ -498,34 +496,30 @@
 
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Select all the anchor tags with data-candidate-id attribute
-            $("a[data-candidate-id]").on("click", function () {
-            // the candidate id from the data attribute
+            $("a[data-candidate-id]").on("click", function() {
+                // the candidate id from the data attribute
                 var candidate_id = $(this).data("candidate-id");
                 // Set the candidate id to the hidden input field in the form
                 $("#candidate_id").val(candidate_id);
             });
 
-            
+
         });
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Select all the anchor tags with data-candidate-id attribute
-            $("a[data-position-id]").on("click", function () {
-            // the candidate id from the data attribute
+            $("a[data-position-id]").on("click", function() {
+                // the candidate id from the data attribute
                 var position_id = $(this).data("position-id");
                 // Set the candidate id to the hidden input field in the form
                 $("#position_id").val(position_id);
             });
 
-            
+
         });
-
-
-
-
     </script>
 </body>
 
