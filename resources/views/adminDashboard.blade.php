@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-6">
 
-                <h1>Welcome admin {{ session('admin_username') }}!</h1>
+                <h1>Welcome, admin {{ session('admin_username') }}!</h1>
 
 
                 <!-- Button trigger modal -->

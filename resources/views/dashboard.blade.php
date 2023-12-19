@@ -36,7 +36,7 @@
     <div class="container m-5">
         <div class="row">
             <div class="col-6">
-                <h1>Welcome! {{ session('voter_username') }}</h1>
+                <h1>Welcome, voter {{ session('voter_username') }}!</h1>
                 @if (session('election_department_id') && !session('has_voted'))
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#voting-modal">
@@ -152,7 +152,7 @@
 
 
 
-        @if (session('has_voted'))
+        @if (session('has_voted') && !session('has_feedback'))
             <div class="modal fade" id="feedback-modal" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="feedback-modal-label" aria-hidden="true">
                 <div class="modal-dialog">
@@ -211,7 +211,7 @@
 
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                             <button type="button" id="feedback-submit-form" class="btn btn-success">Submit</button>
                         </div>
                     </div>

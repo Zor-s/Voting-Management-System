@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('voter_gender');
             $table->integer('voter_age');
             $table->boolean('has_voted')->default(false);
+            $table->boolean('has_feedback')->default(false);
             $table->timestamps();
         });
     }

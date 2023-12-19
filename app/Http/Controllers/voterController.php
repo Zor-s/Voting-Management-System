@@ -78,6 +78,10 @@ class voterController extends Controller
             session(['has_voted' => $voter->has_voted]);
 
 
+
+            $voter = voter::find(session('voter_id'));
+            session(['has_feedback' => $voter->has_feedback]);
+
             return view('dashboard');
         } else {
 

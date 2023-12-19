@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\feedback;
+use App\Models\voter;
 use Illuminate\Http\Request;
 
 class feedbackController extends Controller
@@ -23,6 +24,12 @@ class feedbackController extends Controller
             'feedback_comment' => $request->feedback
 
         ]);
+
+        $voter = voter::find(session('voter_id'));
+        $voter->has_feedback = true;
+        $voter->save();
+
+        session(['has_feedback' => $voter->has_feedback]);
         return view('dashboard');
     }
 }
