@@ -30,6 +30,7 @@ class voterFactory extends Factory
             'voter_email' => fake()->unique()->safeEmail(),
             'voter_gender' => $this->faker->randomElement(['male', 'female']),
             'voter_age' => fake()->randomDigit(),
+            // 'has_voted' => true 
         ];
     }
 }

@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-6">
                 <h1>Welcome! {{ session('voter_username') }}</h1>
-                @if (session('election_department_id'))
+                @if (session('election_department_id') && !session('has_voted'))
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#voting-modal">
                         Vote now!
@@ -150,6 +150,46 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
+        <div class="modal fade" id="feedback-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="feedback-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="feedback-modal-label">Vote for the election of:
+                            {{ session('department_name') }}
+                        </h1>
+
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/vote" class="form-control" id="feedback-form">
+                            @csrf
+      
+                        </form>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="feedback-submit-form" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
 
 
 

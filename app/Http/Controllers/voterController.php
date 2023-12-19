@@ -72,6 +72,12 @@ class voterController extends Controller
             session(['positions' => $positions, 'candidates' => $candidates, 'candidate_parties' => $candidate_parties]);
 
 
+            $voter_id = voter::where('voter_username', $voter_username)->first();
+            session(['voter_id'=>$voter_id->id]);
+            $voter = voter::find(session('voter_id'));
+            session(['has_voted' => $voter->has_voted]);
+
+
             return view('dashboard');
         } else {
 

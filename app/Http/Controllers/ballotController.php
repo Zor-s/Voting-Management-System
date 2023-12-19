@@ -17,18 +17,29 @@ class ballotController extends Controller
 
         $userId = voter::where('voter_username', session('voter_username'))->first()->id;
 
+        $isValid = true;
         foreach ($positions as $position) {
             if (!$request->input($position->id)) {
-                return back()->withErrors(['message' => 'Please select a candidate for all positions.']);
+                $isValid = false;
+                break;
             }
-
-            ballot::create([
-                'candidate_id' => $request->input($position->id),
-                'voter_id' => $userId
-                
-              ]);
         }
-
+        
+        if (!$isValid) {
+            return back()->withErrors(['message' => 'Please select a candidate for all positions.']);
+        } else {
+            foreach ($positions as $position) {
+                ballot::create([
+                    'candidate_id' => $request->input($position->id),
+                    'voter_id' => $userId
+                ]);
+            }
+        }
+        
+        $voter = voter::find(session('voter_id'));
+        $voter->has_voted = true;
+        $voter->save();
+        session(['has_voted' => $voter->has_voted]);
 
 
         return view('dashboard');
