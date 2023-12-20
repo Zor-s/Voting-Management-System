@@ -44,11 +44,18 @@ Route::post('/delete-candidate', [candidateController::class, 'deleteCandidate']
 Route::post('/delete-position', [positionController::class, 'deletePosition']);
 Route::post('/vote', [ballotController::class, 'castVote']);
 Route::post('/feedback', [feedbackController::class, 'submitFeedback']);
+Route::post('/forgot-password', [adminController::class, 'forgotPassword']);
 
 
 Route::post('/logout',  function () {
     session()->flush();
 
     return view('login');
+});
+
+Route::post('/logout-admin',  function () {
+    session()->flush();
+
+    return view('admin');
 });
 

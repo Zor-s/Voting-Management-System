@@ -125,9 +125,7 @@ class voterController extends Controller
 
         if ($voter) {
             echo '<script>alert("Account created successfully!")</script>';
-            return redirect('/');
-
-
+            return view('login');
         }
 
     }

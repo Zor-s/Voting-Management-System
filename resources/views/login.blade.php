@@ -56,7 +56,8 @@
                     <select class="form-select" id="department_name" name="department_name">
                         <option value="1">Institute of Applied and Aquatic Sciences (IAAS)</option>
                         <option value="2">Institute of Computing (IC)</option>
-                        <option value="3">Institute of Leadership, Entrepreneurship and Good Governance (ILEGG)</option>
+                        <option value="3">Institute of Leadership, Entrepreneurship and Good Governance (ILEGG)
+                        </option>
                         <option value="4">Institute of Teacher Education (ITED)</option>
                         <option value="5">Institute of Advanced Studies (IADS)</option>
                     </select>
@@ -84,9 +85,51 @@
                     <br />
 
                     <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                        href="">forgot password?</a>
+                        href="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">forgot
+                        password?</a>
                 </form>
 
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="forgot-password-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="forgot-password-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="forgot-password-modal-label"> Forgot password
+                    </h1>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/forgot-password" class="form-control" id="forgot-password-form">
+                        @csrf
+
+                        <label for="voter_email">Voter email:</label>
+                        <input type="email" name="voter_email" id="voter_email" placeholder="Enter email"
+                            class="form-control" />
+
+                        <label for="voterPassword">Voter password:</label>
+                        <input type="password" id="voterPassword" name="voter_password" placeholder="Enter password"
+                            class="form-control" />
+
+                        <label for="repeatPassword">Repeat password:</label>
+                        <input type="password" id="repeatPassword" name="voter_repeat_password"
+                            placeholder="Enter password" class="form-control" />
+
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="forgot-password-submit-form" class="btn btn-success">Submit</button>
+                </div>
             </div>
         </div>
     </div>
@@ -98,11 +141,30 @@
 
 
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <script>
+        var forgotPasswordForm = $("#forgot-password-form");
+        var forgotPasswordButton = $("#forgot-password-submit-form");
+
+        forgotPasswordButton.click(function() {
+            var voterPassword = $('#voterPassword').val();
+            var repeatPassword = $('#repeatPassword').val();
+
+            if (voterPassword !== repeatPassword) {
+                alert('Passwords do not match. Please try again.');
+            } else {
+                // Passwords match, submit the form
+                forgotPasswordForm.submit();
+            }
+        });
+    </script>
 </body>
 
 </html>

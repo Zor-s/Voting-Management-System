@@ -28,7 +28,7 @@
                         data-bs-target="#voting-result-modal">Voting result</a>
                     <a href="/logout"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                    <form id="logout-form" action="/logout-admin" method="POST" style="display: none;">
                         @csrf
                     </form>
 

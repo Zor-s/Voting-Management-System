@@ -18,9 +18,7 @@
             border: 3px solid red;
 
         } */
-        body{
-            background: #CB0000;
-        }
+
 
         /* @media screen and (max-width: 768px) {
             .container .row {
@@ -36,7 +34,7 @@
 
 
     <div class="container">
-        <div class="row my-3 mx-1">
+        <div class="row my-5 mx-1">
             <div class="my-content col-sm-6 col-12 m-auto">
                 <h1>Voting Management System</h1>
                 <br />
@@ -81,8 +79,7 @@
 
                     <br />
 
-                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                        href="">forgot password?</a>
+
                 </form>
 
             </div>

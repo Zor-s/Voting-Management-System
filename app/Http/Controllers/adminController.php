@@ -55,12 +55,12 @@ class adminController extends Controller
             $candidates = candidate::all();
             $candidate_parties = candidate_party::all();
 
-            $election = election::where('department_id',session('department_id'))->first();
+            $election = election::where('department_id', session('department_id'))->first();
 
             if ($election) {
                 # code...
                 session(['election_start' => $election->election_start, 'election_end' => $election->election_end]);
-            }else {
+            } else {
                 # code...
                 session(['election_start' => 0, 'election_end' => 0]);
 
@@ -77,6 +77,33 @@ class adminController extends Controller
             return redirect('/admin');
         }
 
+
+    }
+
+
+
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+            'voter_email' => 'required',
+            'voter_password' => 'required',
+        ]);
+
+
+        // Retrieve the post from the database
+        $forgotPassword = voter::where('voter_email', '=', $request->voter_email)->first();
+
+
+        // Edit the title and content attributes
+        $forgotPassword->voter_password = Hash::make($request->voter_password);
+
+
+        // Save the changes to the database
+        $forgotPassword->save();
+
+        echo '<script>alert("Password changed successfully!")</script>';
+        return view('login');
 
     }
 }
