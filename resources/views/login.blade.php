@@ -66,13 +66,13 @@
 
                     <label for="voter_username">Voter username:</label>
                     <input type="text" name="voter_username" id="voter_username" placeholder="Enter username"
-                        class="form-control" />
+                        class="form-control" required/>
 
                     <br />
 
                     <label for="voter_password">Voter password:</label>
                     <input type="password" id="voter_password" name="voter_password" placeholder="Enter password"
-                        class="form-control" />
+                        class="form-control" required/>
                     <br />
 
                     <button class="btn btn-outline-success m-1">Log in</button>
@@ -111,15 +111,15 @@
 
                         <label for="voter_email">Voter email:</label>
                         <input type="email" name="voter_email" id="voter_email" placeholder="Enter email"
-                            class="form-control" />
+                            class="form-control" required/>
 
                         <label for="voterPassword">Voter password:</label>
                         <input type="password" id="voterPassword" name="voter_password" placeholder="Enter password"
-                            class="form-control" />
+                            class="form-control" required/>
 
                         <label for="repeatPassword">Repeat password:</label>
                         <input type="password" id="repeatPassword" name="voter_repeat_password"
-                            placeholder="Enter password" class="form-control" />
+                            placeholder="Enter password" class="form-control" required/>
 
                     </form>
 
@@ -150,20 +150,38 @@
 
 
     <script>
-        var forgotPasswordForm = $("#forgot-password-form");
-        var forgotPasswordButton = $("#forgot-password-submit-form");
+$(document).ready(function() {
+    $('#forgot-password-submit-form').click(function(e) {
+        e.preventDefault();
 
-        forgotPasswordButton.click(function() {
-            var voterPassword = $('#voterPassword').val();
-            var repeatPassword = $('#repeatPassword').val();
+        var email = $('#voter_email').val();
+        var password = $('#voterPassword').val();
+        var repeatPassword = $('#repeatPassword').val();
 
-            if (voterPassword !== repeatPassword) {
-                alert('Passwords do not match. Please try again.');
-            } else {
-                // Passwords match, submit the form
-                forgotPasswordForm.submit();
-            }
-        });
+        // Regular expression for basic email validation
+        var emailRegEx = /@/;
+
+        if(email == "" || password == "" || repeatPassword == "") {
+            alert("All fields are required.");
+            return false;
+        }
+
+        if(!emailRegEx.test(email)) {
+            alert("Please enter a valid email.");
+            return false;
+        }
+
+        if(password != repeatPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        // If all validations pass, submit the form
+        $('#forgot-password-form').submit();
+    });
+});
+
+
     </script>
 </body>
 

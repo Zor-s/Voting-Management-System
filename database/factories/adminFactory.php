@@ -28,8 +28,8 @@ class adminFactory extends Factory
             // "admin_password"=> Hash::make('password'),
 
             "department_id"=> 1,
-            "admin_username"=> 'a',
-            "admin_password"=> Hash::make('a'),
+            "admin_username"=> 'John',
+            "admin_password"=> Hash::make('admin'),
         ];
     }
 }

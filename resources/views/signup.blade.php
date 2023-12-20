@@ -41,28 +41,28 @@
 
                     <label for="voter_email">Voter email:</label>
                     <input type="email" name="voter_email" id="voter_email" placeholder="Enter email"
-                        class="form-control" />
+                        class="form-control" required/>
 
                     <label for="voter_username">Voter username:</label>
                     <input type="text" name="voter_username" id="voter_username" placeholder="Enter username"
-                        class="form-control" />
+                        class="form-control" required/>
 
                     <div class="row">
                         <div class="col">
                             <label for="voter_age">Age:</label>
-                            <input type="number" name="voter_age" id="voter_age" class="form-control" />
+                            <input type="number" name="voter_age" id="voter_age" class="form-control" required/>
                         </div>
                         <div class="col">
                             <div class="form-check">
                                 <p>Gender:</p>
-                                <input class="form-check-input" type="radio" name="voter_gender" id="male" value="male" />
+                                <input class="form-check-input" type="radio" name="voter_gender" id="male" value="male" required/>
                                 <label class="form-check-label" for="male">
                                     Male
                                 </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="voter_gender" id="female" value="female"/>
+                                <input class="form-check-input" type="radio" name="voter_gender" id="female" value="female" required/>
                                 <label class="form-check-label" for="female">
                                     Female
                                 </label>
@@ -72,11 +72,11 @@
 
                     <label for="voterPassword">Voter password:</label>
                     <input type="password" id="voterPassword" name="voter_password" placeholder="Enter password"
-                        class="form-control" />
+                        class="form-control" required/>
 
                     <label for="repeatPassword">Repeat password:</label>
                     <input type="password" id="repeatPassword" name="voter_repeat_password"
-                        placeholder="Enter password" class="form-control" />
+                        placeholder="Enter password" class="form-control" required/>
 
                     <input type="submit" class="btn btn-outline-success" value="Sign up">
 
@@ -119,6 +119,13 @@
                 this.submit();
             }
         });
+
+
+
+
+
+
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

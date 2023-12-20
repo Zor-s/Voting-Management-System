@@ -65,13 +65,13 @@
 
                     <label for="admin_username">Voter username:</label>
                     <input type="text" name="admin_username" id="admin_username" placeholder="Enter username"
-                        class="form-control" />
+                        class="form-control" required/>
 
                     <br />
 
                     <label for="admin_password">Voter password:</label>
                     <input type="password" id="admin_password" name="admin_password" placeholder="Enter password"
-                        class="form-control" />
+                        class="form-control" required/>
                     <br />
 
                     <button class="btn btn-outline-success m-1">Log in</button>
