@@ -56,7 +56,7 @@ class electionController extends Controller
             'edit_election_end' => 'required|date|after:election_start'
         ]);
 
-        // Retrieve the post from the database
+        // Retrieve the election from the database
         $election = election::find(session('department_id'));
 
         // Edit the title and content attributes

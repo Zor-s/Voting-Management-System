@@ -21,8 +21,6 @@ class votingResultController extends Controller
 
 
 
-
-
         // Get all candidate_ids that appear more than once
         $duplicateCandidateIds = voting_result::select('candidate_id')
             ->groupBy('candidate_id')

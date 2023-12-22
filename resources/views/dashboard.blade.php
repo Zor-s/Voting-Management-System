@@ -5,17 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
+
+    <!-- Link to the Bootstrap CSS library from a CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Link to the custom CSS file -->
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
 
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
         <div class="container-fluid px-5">
-            <!-- <a class="navbar-brand disabled" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,6 +45,8 @@
 
     <div class="container p-5">
         <div class="row">
+
+            <!-- Container for the welcome message and voting button -->
             <div class="col-sm-6 col-12 m-auto">
                 <h1>Welcome, voter {{ session('voter_username') }}!</h1>
                 @if (session('election_department_id') && !session('has_voted'))
@@ -54,25 +61,28 @@
                 @endif
 
             </div>
+
+
             <div class="col-sm-6 col-12 m-auto">
+                <!-- Election information section -->
                 <h1>Elections: </h1>
                 @if (session('election_department_id'))
-                    <p>
-                        {{ session('department_name') }}
-                    </p>
+                    <!-- Display department information -->
+                    <p>{{ session('department_name') }}</p>
                     <p>Start: {{ session('election_start') }}</p>
                     <p>End: {{ session('election_end') }}</p>
 
                     <p>List of candidates:</p>
 
                     <ul>
+                        <!-- Iterate through each position -->
                         @foreach (session('positions') as $position)
                             <li>{{ $position->position_name }}
-
-
+                                <!-- Display candidates for the current position -->
                                 <ol>
                                     @foreach (session('candidates') as $candidate)
                                         @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
+                                            <!-- Display candidate information -->
                                             <li>
                                                 {{ $candidate->candidate_full_name }}
                                                 ({{ $candidate->candidate_party->candidate_party_name }})
@@ -84,9 +94,11 @@
                         @endforeach
                     </ul>
                 @else
+                    <!-- Display message when no elections are added -->
                     <p>No elections added</p>
                 @endif
             </div>
+
         </div>
 
 
@@ -167,7 +179,6 @@
                             </h1>
 
 
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         </div>
                         <div class="modal-body">
                             <form method="POST" action="/feedback" class="form-control" id="feedback-form">
@@ -223,7 +234,6 @@
 
 
                         <div class="modal-footer">
-                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                             <button type="button" id="feedback-submit-form" class="btn btn-success">Submit</button>
                         </div>
                     </div>
@@ -246,62 +256,62 @@
 
 
         <div class="modal fade" id="voting-result-modal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="voting-result-modal-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="voting-result-modal-label">Voting result
-                    </h1>
+            tabindex="-1" aria-labelledby="voting-result-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="voting-result-modal-label">Voting result
+                        </h1>
 
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-
-
-                    <ul>
-                        @foreach (session('positions') as $position)
-                            <li>{{ $position->position_name }}
-
-
-                                <ol>
-                                    @foreach (session('candidates') as $candidate)
-                                        @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
-                                            <li>
-                                                {{ $candidate->candidate_full_name }}
-                                                ({{ $candidate->candidate_party->candidate_party_name }})
-                                                -
-                                                {{ \App\Http\Controllers\votingResultController::voteCounter($candidate->id) }}
-                                                Vote/s
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ol>
-                            </li>
-                        @endforeach
-                    </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
 
 
-                </div>
+                        <ul>
+                            @foreach (session('positions') as $position)
+                                <li>{{ $position->position_name }}
 
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" id="voting-result-submit-form" class="btn btn-danger">Delete</button> -->
+                                    <ol>
+                                        @foreach (session('candidates') as $candidate)
+                                            @if ($candidate->position_id == $position->id && $candidate->department_id == session('election_department_id'))
+                                                <li>
+                                                    {{ $candidate->candidate_full_name }}
+                                                    ({{ $candidate->candidate_party->candidate_party_name }})
+                                                    -
+                                                    {{ \App\Http\Controllers\votingResultController::voteCounter($candidate->id) }}
+                                                    Vote/s
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </li>
+                            @endforeach
+                        </ul>
+
+
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-
+        <!-- Include Bootstrap JavaScript library -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
 
-
+        <!-- Include jQuery library -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -309,6 +319,7 @@
 
 
         <script>
+            // for the modal form submission
             var votingForm = $("#voting-form");
 
             var votingButton = $("#voting-submit-form");

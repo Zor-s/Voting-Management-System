@@ -50,12 +50,12 @@ Route::post('/forgot-password', [adminController::class, 'forgotPassword']);
 Route::post('/logout',  function () {
     session()->flush();
 
-    return view('login');
+    return redirect('/');
 });
 
 Route::post('/logout-admin',  function () {
     session()->flush();
 
-    return view('admin');
+    return redirect('/admin');
 });
 
