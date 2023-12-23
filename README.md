@@ -1,4 +1,8 @@
-<h1>eyy</h1>
+<h1>Instructions to run:</h1>
+<p>Run "npm install" in the terminal</p>
+<p>Run "composer install" in the terminal</p>
+<p>Run "php artisan serve" in the terminal</p>
+<p>Run "php artisan migrate --seed" in the terminal</p>
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
